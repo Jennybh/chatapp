@@ -6,8 +6,10 @@ const chatRoutes = require("./routes/chatRoutes");
 const messageRoutes = require("./routes/messageRoutes");
 const { notFound, errorHandler } = require("./middleware/errorMiddleware");
 const path = require("path");
+require('dotenv').config();
 
 dotenv.config();
+
 connectDB();
 const app = express();
 
@@ -43,7 +45,7 @@ if (process.env.NODE_ENV === "production") {
 app.use(notFound);
 app.use(errorHandler);
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3001;
 
 const server = app.listen(
   PORT,
@@ -89,3 +91,4 @@ io.on("connection", (socket) => {
     socket.leave(userData._id);
   });
 });
+
